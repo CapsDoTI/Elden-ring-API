@@ -51,3 +51,48 @@ img {
   margin-top: 15px;
   border: 2px solid #f6e27a;
 }
+
+/* Navbar estilizada estilo dark fantasy */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: rgba(15, 15, 15, 0.85);
+  padding: 10px 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.7);
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  color: #f6e27a;
+  font-family: 'Georgia', serif;
+}
+
+.nav-links a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #e0d6b6;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #f6e27a;
+}
+
+/* Ajuste geral para empurrar conteúdo abaixo da navbar */
+body {
+  padding-top: 70px;
+}
+
