@@ -48,6 +48,24 @@ window.onload = function () {
       return;
     }
   
+    // 💡 Tratamento especial para Malenia
+    if (nome === 'malenia') {
+      resultadoDiv.innerHTML = `
+        <h3>Malenia, Espada de Miquella</h3>
+        <img src="img/malenia.png" alt="Malenia" style="max-width:100%;height:auto;" />
+        <p><strong>Localização:</strong> Elphael, Brace of the Haligtree</p>
+        <p><strong>Descrição:</strong> Malenia é uma das lutas mais desafiadoras de Elden Ring. Conhecida por sua graça mortal e sua regeneração constante, ela é uma guerreira incomparável que nunca conheceu a derrota até você aparecer.</p>
+  
+        <h4>🔎 Estratégias & Builds recomendadas</h4>
+        <p><em>Fraquezas:</em> Sangramento, Congelamento</p>
+        <p><em>Estratégias conhecidas:</em> Mantenha distância durante a Dança das Lâminas de Água. Use ataques rápidos e esquivas precisas.</p>
+        <p><em>Builds recomendadas:</em> Dex/Sangramento com katanas, builds de congelamento com magia, uso de invocações como Mimic Tear</p>
+      `;
+      console.log('Informações especiais da Malenia exibidas.');
+      return;
+    }
+  
+    // 🔍 Caso genérico (outros bosses)
     resultadoDiv.innerHTML = 'Buscando informações sobre o boss...';
   
     fetch(`https://eldenring.fanapis.com/api/bosses?name=${encodeURIComponent(nome)}`)
@@ -78,8 +96,6 @@ window.onload = function () {
           <p><em>Estratégias conhecidas:</em> (ex: manter distância, atacar após segundo golpe, etc.)</p>
           <p><em>Builds recomendadas:</em> (força, fé, inteligência...)</p>
         `;
-  
-        console.log(`Informações do boss ${boss.name} exibidas com sucesso.`);
       })
       .catch(err => {
         console.error('Erro durante a busca do boss:', err);
