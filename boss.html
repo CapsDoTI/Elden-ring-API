@@ -1,0 +1,40 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Elden Ring Info + Boss Finder</title>
+    <link rel="stylesheet" href="estilo/boss.css">
+</head>
+
+<body>
+    <!-- Camadas de fundo -->
+    <div id="background-container"></div>
+    <div id="background-blur-layer"></div>
+
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="navbar-container">
+            <div class="logo">⚔️ Elden Ring</div>
+            <nav class="nav-links">
+                <a href="./index.html">Início</a>
+                <a href="#boss">Pesquisar Boss</a>
+                <a href="#item">Itens</a>
+                <a href="https://github.com/CapsDoTI">Github</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Conteúdo principal -->
+    <div class="section">
+        <h2>🐉 Buscar Boss</h2>
+        <input type="text" id="bossInput" placeholder="Digite o nome do boss sem erros 👌" />
+        <button onclick="buscarBoss()">Buscar</button>
+        <div id="resultadoBoss" style="margin-top: 20px;"></div>
+    </div>
+
+    <script src="script/index.js"></script>
+</body>
+
+</html>

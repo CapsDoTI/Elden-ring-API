@@ -1,15 +1,36 @@
 body {
   margin: 0;
   padding: 0;
-  background: url('../img/elden-ring-bg.jpg') no-repeat center center fixed;
-  background-size: cover;
   font-family: 'Georgia', serif;
   color: #e3d7b5;
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
+  padding-top: 70px;
+}
 
+#background-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../img/elden-ring-bg2.jpg') no-repeat center center fixed;
+  background-size: cover;
+  z-index: -2;
+}
+
+#background-blur-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(0px);
+  transition: backdrop-filter 0.4s ease;
+  z-index: -1;
+  pointer-events: none;
 }
 
 h1, h2, h3 {
@@ -27,6 +48,7 @@ h1, h2, h3 {
   width: 90%;
   max-width: 800px;
   text-align: center;
+  z-index: 1;
 }
 
 input, button {
@@ -52,7 +74,6 @@ img {
   border: 2px solid #f6e27a;
 }
 
-/* Navbar estilizada estilo dark fantasy */
 .navbar {
   position: fixed;
   top: 0;
@@ -76,7 +97,6 @@ img {
   font-size: 22px;
   font-weight: bold;
   color: #f6e27a;
-  font-family: 'Georgia', serif;
 }
 
 .nav-links a {
@@ -90,9 +110,3 @@ img {
 .nav-links a:hover {
   color: #f6e27a;
 }
-
-/* Ajuste geral para empurrar conteúdo abaixo da navbar */
-body {
-  padding-top: 70px;
-}
-

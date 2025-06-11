@@ -37,69 +37,62 @@ window.onload = function () {
   
   // 🧠 Busca informações de um boss pela Fan API
   function buscarBoss() {
-    const nome = document.getElementById('bossInput').value.trim().toLowerCase();
-    const resultadoDiv = document.getElementById('resultadoBoss');
-  
-    console.log('Iniciando busca do boss:', nome);
-  
-    if (!nome) {
-      resultadoDiv.innerHTML = '<p style="color:red;">Digite o nome de um boss.</p>';
-      console.warn('Campo do nome do boss vazio');
-      return;
-    }
-  
-    // 💡 Tratamento especial para Malenia
-    if (nome === 'malenia') {
-      resultadoDiv.innerHTML = `
-        <h3>Malenia, Espada de Miquella</h3>
-        <img src="img/malenia.png" alt="Malenia" style="max-width:100%;height:auto;" />
-        <p><strong>Localização:</strong> Elphael, Brace of the Haligtree</p>
-        <p><strong>Descrição:</strong> Malenia é uma das lutas mais desafiadoras de Elden Ring. Conhecida por sua graça mortal e sua regeneração constante, ela é uma guerreira incomparável que nunca conheceu a derrota até você aparecer.</p>
-  
-        <h4>🔎 Estratégias & Builds recomendadas</h4>
-        <p><em>Fraquezas:</em> Sangramento, Congelamento</p>
-        <p><em>Estratégias conhecidas:</em> Mantenha distância durante a Dança das Lâminas de Água. Use ataques rápidos e esquivas precisas.</p>
-        <p><em>Builds recomendadas:</em> Dex/Sangramento com katanas, builds de congelamento com magia, uso de invocações como Mimic Tear</p>
-      `;
-      console.log('Informações especiais da Malenia exibidas.');
-      return;
-    }
-  
-    // 🔍 Caso genérico (outros bosses)
-    resultadoDiv.innerHTML = 'Buscando informações sobre o boss...';
-  
-    fetch(`https://eldenring.fanapis.com/api/bosses?name=${encodeURIComponent(nome)}`)
-      .then(res => {
-        console.log('Resposta FanAPI recebida:', res);
-        if (!res.ok) throw new Error(`Status da resposta: ${res.status}`);
-        return res.json();
-      })
-      .then(data => {
-        console.log('Dados do boss recebidos:', data);
-  
-        if (!data.data || data.data.length === 0) {
-          resultadoDiv.innerHTML = `<p>Nenhum boss chamado <strong>${nome}</strong> foi encontrado.</p>`;
-          console.info(`Nenhum boss encontrado para o nome: ${nome}`);
-          return;
-        }
-  
-        const boss = data.data[0];
-        
-        resultadoDiv.innerHTML = `
-          <h3>${boss.name}</h3>
-          ${boss.image ? `<img src="${boss.image}" alt="${boss.name}" />` : ''}
-          <p><strong>Localização:</strong> ${boss.location || 'Desconhecida'}</p>
-          <p><strong>Descrição:</strong> ${boss.description}</p>
-  
-          <h4>🔎 Estratégias & Builds recomendadas</h4>
-          <p><em>Fraquezas:</em> (adicionar manualmente ou por lógica futura)</p>
-          <p><em>Estratégias conhecidas:</em> (ex: manter distância, atacar após segundo golpe, etc.)</p>
-          <p><em>Builds recomendadas:</em> (força, fé, inteligência...)</p>
-        `;
-      })
-      .catch(err => {
-        console.error('Erro durante a busca do boss:', err);
-        resultadoDiv.innerHTML = 'Erro ao buscar o boss.';
-      });
+  const nome = document.getElementById('bossInput').value.trim().toLowerCase();
+  const resultadoDiv = document.getElementById('resultadoBoss');
+  const blurLayer = document.getElementById('background-blur-layer');
+
+  if (!nome) {
+    resultadoDiv.innerHTML = '<p style="color:red;">Digite o nome de um boss.</p>';
+    return;
   }
-  
+
+  // Ativa o desfoque
+  blurLayer.style.backdropFilter = 'blur(6px)';
+
+  // 🔁 Malenia (caso especial)
+  if (nome === 'malenia') {
+    resultadoDiv.innerHTML = `
+      <h3>Malenia, Espada de Miquella</h3>
+      <img src="img/malenia.png" alt="Malenia" />
+      <p><strong>Localização:</strong> Elphael, Brace of the Haligtree</p>
+      <p><strong>Descrição:</strong> Malenia é uma das lutas mais desafiadoras...</p>
+      <h4>🔎 Estratégias & Builds recomendadas</h4>
+      <p><em>Fraquezas:</em> Sangramento, Congelamento</p>
+      <p><em>Estratégias:</em> Mantenha distância durante a Dança das Lâminas...</p>
+      <p><em>Builds:</em> Dex/Sangramento, gelo, Mimic Tear</p>
+    `;
+    return;
+  }
+
+  // 🔍 Busca geral
+  resultadoDiv.innerHTML = 'Buscando informações sobre o boss...';
+
+  fetch(`https://eldenring.fanapis.com/api/bosses?name=${encodeURIComponent(nome)}`)
+    .then(res => {
+      if (!res.ok) throw new Error(`Status: ${res.status}`);
+      return res.json();
+    })
+    .then(data => {
+      if (!data.data || data.data.length === 0) {
+        resultadoDiv.innerHTML = `<p>Nenhum boss chamado <strong>${nome}</strong> foi encontrado.</p>`;
+        return;
+      }
+
+      const boss = data.data[0];
+
+      resultadoDiv.innerHTML = `
+        <h3>${boss.name}</h3>
+        ${boss.image ? `<img src="${boss.image}" alt="${boss.name}" />` : ''}
+        <p><strong>Localização:</strong> ${boss.location || 'Desconhecida'}</p>
+        <p><strong>Descrição:</strong> ${boss.description || 'Sem descrição disponível.'}</p>
+        <h4>🔎 Estratégias & Builds recomendadas</h4>
+        <p><em>Fraquezas:</em> (adicionar manualmente)</p>
+        <p><em>Estratégias:</em> (baseado no estilo de luta)</p>
+        <p><em>Builds:</em> (força, fé, magia...)</p>
+      `;
+    })
+    .catch(err => {
+      resultadoDiv.innerHTML = 'Erro ao buscar o boss.';
+      console.error(err);
+    });
+}
