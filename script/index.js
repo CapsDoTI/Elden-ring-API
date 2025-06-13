@@ -96,3 +96,71 @@ window.onload = function () {
       console.error(err);
     });
 }
+
+function buscarItem() {
+  const nome = document.getElementById('itemInput').value.trim().toLowerCase();
+  const resultadoDiv = document.getElementById('resultadoItem');
+  const blurLayer = document.getElementById('background-blur-layer');
+
+  if (!nome) {
+    resultadoDiv.innerHTML = '<p style="color:red;">Digite o nome de um item ou arma.</p>';
+    return;
+  }
+
+  blurLayer.style.backdropFilter = 'blur(6px)';
+  resultadoDiv.innerHTML = 'Buscando informações...';
+
+  // 🔍 Primeira tentativa: buscar como item
+  fetch(`https://eldenring.fanapis.com/api/items?name=${encodeURIComponent(nome)}`)
+    .then(res => {
+      if (!res.ok) throw new Error(`Status: ${res.status}`);
+      return res.json();
+    })
+    .then(data => {
+      if (data.data && data.data.length > 0) {
+        const item = data.data[0];
+        resultadoDiv.innerHTML = `
+          <h3>${item.name}</h3>
+          ${item.image ? `<img src="${item.image}" alt="${item.name}" />` : ''}
+          <p><strong>Categoria:</strong> ${item.category || 'Desconhecida'}</p>
+          <p><strong>Descrição:</strong> ${item.description || 'Sem descrição disponível.'}</p>
+          <p><strong>Efeito:</strong> ${item.effect || 'Sem efeito informado.'}</p>
+        `;
+      } else {
+        // Se não achou como item, tenta como arma
+        buscarComoArma(nome, resultadoDiv);
+      }
+    })
+    .catch(err => {
+      console.error('Erro na busca como item:', err);
+      // Ainda tenta como arma se der erro
+      buscarComoArma(nome, resultadoDiv);
+    });
+}
+
+function buscarComoArma(nome, resultadoDiv) {
+  fetch(`https://eldenring.fanapis.com/api/weapons?name=${encodeURIComponent(nome)}`)
+    .then(res => {
+      if (!res.ok) throw new Error(`Status: ${res.status}`);
+      return res.json();
+    })
+    .then(data => {
+      if (data.data && data.data.length > 0) {
+        const arma = data.data[0];
+        resultadoDiv.innerHTML = `
+          <h3>${arma.name}</h3>
+          ${arma.image ? `<img src="${arma.image}" alt="${arma.name}" />` : ''}
+          <p><strong>Categoria:</strong> ${arma.category || 'Desconhecida'}</p>
+          <p><strong>Descrição:</strong> ${arma.description || 'Sem descrição disponível.'}</p>
+          <p><strong>Escalamento:</strong> ${arma.scalesWith?.map(s => `${s.name}: ${s.scaling}`).join(', ') || 'Não informado'}</p>
+          <p><strong>Atributos Requeridos:</strong> ${arma.requiredAttributes?.map(a => `${a.name}: ${a.amount}`).join(', ') || 'Não informado'}</p>
+        `;
+      } else {
+        resultadoDiv.innerHTML = `<p>Nenhum item ou arma chamado <strong>${nome}</strong> foi encontrado.</p>`;
+      }
+    })
+    .catch(err => {
+      console.error('Erro na busca como arma:', err);
+      resultadoDiv.innerHTML = 'Erro ao buscar o item ou arma.';
+    });
+}
