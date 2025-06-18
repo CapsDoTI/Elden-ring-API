@@ -64,6 +64,45 @@ function buscarBoss() {
     return;
   }
 
+  if (nome === 'radahn') {
+    resultadoDiv.innerHTML = `
+      <h3>General Radahn</h3>
+      <img src="img/radahn.png" alt="Radahn" />
+      <p><strong>Localização:</strong> Caelid - Redmane Castle (Festival de Radahn)</p>
+      <p><strong>Descrição:</strong> General Radahn é um dos filhos de Radagon e Rennala. Um guerreiro colossal, mestre da gravidade, enlouquecido pela podridão escarlate. Sua batalha é lendária por envolver um festival de guerreiros reunidos para derrotá-lo.</p>
+      <h4>🔎 Estratégias & Builds recomendadas</h4>
+      <p><em>Fraquezas:</em> Congelamento, Magia, Sagrado</p>
+      <p><em>Estratégias:</em> Utilize os sinais de invocação repetidamente. Desvie das flechas gigantes enquanto se aproxima. Após a queda meteórica, esteja preparado para esquivar rapidamente de ataques em área.</p>
+      <p><em>Builds:</em> Magia de longo alcance, builds de fé com feitiços sagrados, Mimic Tear + Spirit Ashes resistentes</p>
+    `;
+  comentariosDiv.style.display = 'block';
+  exibirComentarios('General Radahn');
+  return;
+  }
+
+  if (nome === 'alexander') {
+  resultadoDiv.innerHTML = `
+    <h3>Iron Fist Alexander</h3>
+    <img src="img/alexander.png" alt="Alexander" />
+    <p><strong>Localização:</strong> Vários locais ao longo do jogo (principalmente Caelid)</p>
+    <p><strong>Descrição:</strong> Alexander é um guerreiro jarro em busca de crescimento e desafios. Seu espírito determinado e sua lealdade marcam sua jornada ao lado do jogador.</p>
+    <h4>🔎 Estratégias & Builds recomendadas</h4>
+    <p><em>Fraquezas:</em> Não aplicável — personagem aliado</p>
+    <p><em>Interações:</em> Ajuda em lutas contra Radahn, tem história envolvente</p>
+    <p><em>Builds recomendadas:</em> Roleplay com força ou armas pesadas</p>
+
+    <div style="text-align: center; margin-top: 20px;">
+      <iframe src="https://tenor.com/embed/4862040813430154152" width="300" height="300" frameborder="0" allowfullscreen></iframe>
+    </div>
+  `;
+
+  comentariosDiv.style.display = 'block';
+  exibirComentarios('Iron Fist Alexander');
+  return;
+}
+
+
+
   resultadoDiv.innerHTML = 'Buscando informações sobre o boss...';
 
   fetch(`https://eldenring.fanapis.com/api/bosses?name=${encodeURIComponent(nome)}`)
