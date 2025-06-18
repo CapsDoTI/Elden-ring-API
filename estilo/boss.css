@@ -110,3 +110,35 @@ img {
 .nav-links a:hover {
   color: #f6e27a;
 }
+
+#formComentario {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#formComentario input,
+#formComentario textarea,
+#formComentario select {
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background-color: #1e1e1e;
+  color: white;
+}
+
+#formComentario button {
+  padding: 8px;
+  background-color: #7a552f;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#listaComentarios .comentario {
+  border-top: 1px solid #333;
+  padding-top: 10px;
+  margin-top: 10px;
+}
