@@ -129,4 +129,4 @@ Abra o arquivo index.html e seja feliz teste as funções de busca de boss
 
 Interaja com o conteúdo: busque bosses, veja estratégias e avalie!
 
-salamaleko -- !>
+salamaleko -->

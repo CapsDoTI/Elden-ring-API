@@ -33,7 +33,9 @@ body {
   pointer-events: none;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   color: #f6e27a;
   text-shadow: 1px 1px 5px #000;
   text-align: center;
@@ -51,7 +53,8 @@ h1, h2, h3 {
   z-index: 1;
 }
 
-input, button {
+input,
+button {
   padding: 10px;
   font-size: 18px;
   background-color: #222;
@@ -81,7 +84,7 @@ img {
   background-color: rgba(15, 15, 15, 0.85);
   padding: 10px 0;
   z-index: 1000;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.7);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
 }
 
 .navbar-container {

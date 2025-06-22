@@ -1,0 +1,69 @@
+/* Cor e fonte padrão do seu projeto */
+body {
+    background-color: #000;
+    /* fundo escuro (ou como era antes) */
+    color: #f0e6d2 !important;
+    /* cor clara típica de jogos como Elden Ring */
+    font-family: "Georgia", serif !important;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Títulos */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #d4c393 !important;
+    /* tom dourado claro */
+    font-family: "Georgia", serif !important;
+    font-weight: normal;
+}
+
+/* Parágrafos e textos */
+p,
+span,
+li,
+a {
+    color: #f0e6d2 !important;
+}
+
+/* Links com hover dourado */
+a:hover {
+    color: #ffd700 !important;
+}
+
+/* Inputs e campos de texto */
+input,
+textarea,
+select {
+    background-color: #1a1a1a;
+    color: #f0e6d2;
+    border: 1px solid #d4c393;
+    font-family: "Georgia", serif;
+}
+
+input::placeholder {
+    color: #bbb;
+}
+
+/* Botões personalizados */
+button {
+    background-color: #8b7d3a;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    font-family: "Georgia", serif;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #a9944e;
+}
+
+/* Corrige o container do Bootstrap se estiver muito claro */
+.container {
+    background-color: transparent !important;
+}
